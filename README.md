@@ -25,5 +25,4 @@ $ cd frontend
 $ yarn build
 $ expo start
 ```
-Press w on keyboard
-Enter http://localhost:19006/
+   Then, press w on keyboard and enter http://localhost:19006/
