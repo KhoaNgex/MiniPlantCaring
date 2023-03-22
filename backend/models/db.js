@@ -10,5 +10,7 @@ mongoose.connect(uri, { useNewUrlParser: true }, (err) => {
 });
 
 // register for model
-require('./employee.model');
-require("./pet.model");
+require('./temperature.model');
+require("./humidity.model");
+require("./light.model");
+require("./soil_moisture.model")

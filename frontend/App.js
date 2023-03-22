@@ -1,6 +1,6 @@
 import React from "react";
-import CoffeeAutonomous from "./CoffeeAutonomous";
+import MainContainer from "./navigation/MainContainer";
 
 export default function App() {
-  return <CoffeeAutonomous />;
+  return <MainContainer />;
 }

@@ -1,14 +1,14 @@
 require('./models/db');
 
 const express = require('express');
-const path = require('path');
-const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser');
 const morgan = require("morgan");
 var cors = require("cors");
 
-const employeeRouter = require('./routes/employeeRoutes');
-const petRouter = require("./routes/petRoutes");
+const temperatureRouter = require("./routes/temperatureRoutes");
+const humidityRouter = require("./routes/humidityRoutes");
+const lightRouter = require("./routes/lightRoutes");
+const soil_moistureRouter = require("./routes/soil_moistureRoutes");
 
 var app = express();
 
@@ -23,19 +23,11 @@ app.use(bodyparser.urlencoded({
 }));
 app.use(bodyparser.json());
 
-// set up template handlebars
-app.set('views', path.join(__dirname, '/views/'));
-app.engine('hbs', exphbs({ extname: 'hbs', defaultLayout: 'mainLayout', layoutsDir: __dirname + '/views/layouts/' }));
-app.set('view engine', 'hbs');
-
 app.listen(3000, () => {
     console.log('Express server started at port : 3000');
 });
 
-app.use('/employee', employeeRouter);
-app.use("/pet", petRouter);
-
-// test
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use('/temperature', temperatureRouter);
+app.use("/humidity", humidityRouter);
+app.use("/light", lightRouter);
+app.use("/soil_moisture", soil_moistureRouter);
