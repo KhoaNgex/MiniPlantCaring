@@ -26,7 +26,7 @@ const HomeScreen = () => {
                     color: "white",
                     fontSize: 23,
                     fontWeight: "500",
-                    marginLeft: 40,
+                    marginLeft: 30,
                     marginTop: 50,
                   }}
                 >
@@ -38,7 +38,7 @@ const HomeScreen = () => {
                     fontSize: 14,
                     fontWeight: "200",
                     marginTop: 6,
-                    marginLeft: 40,
+                    marginLeft: 30,
                   }}
                 >
                   Hãy chăm sóc cây trồng của bạn theo cách mới!

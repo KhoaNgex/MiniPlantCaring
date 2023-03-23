@@ -65,43 +65,44 @@ const MainContainer = () => {
           name={exploreName}
           component={ExploreScreen}
           options={{
-            headerTitle: () => (
-              <View
-                style={{
-                  paddingLeft: 15,
-                }}
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    fontSize: 23,
-                    fontWeight: "500",
-                  }}
-                >
-                  Đề xuất
-                </Text>
-                <Text
-                  style={{
-                    color: "white",
-                    fontSize: 14,
-                    fontWeight: "200",
-                    marginTop: 5,
-                    marginBottom: 7,
-                  }}
-                >
-                  Làm sao để cây phát triển tốt?
-                </Text>
-              </View>
-            ),
-            headerStyle: {
-              height: 170,
-            },
-            headerBackground: () => (
-              <Image
-                style={StyleSheet.absoluteFill}
-                source={require("../assets/header-bg.png")}
-              />
-            ),
+            headerShown: false,
+          //   headerTitle: () => (
+          //     <View
+          //       style={{
+          //         paddingLeft: 15,
+          //       }}
+          //     >
+          //       <Text
+          //         style={{
+          //           color: "white",
+          //           fontSize: 23,
+          //           fontWeight: "500",
+          //         }}
+          //       >
+          //         Đề xuất
+          //       </Text>
+          //       <Text
+          //         style={{
+          //           color: "white",
+          //           fontSize: 14,
+          //           fontWeight: "200",
+          //           marginTop: 5,
+          //           marginBottom: 7,
+          //         }}
+          //       >
+          //         Làm sao để cây phát triển tốt?
+          //       </Text>
+          //     </View>
+            // ),
+            // headerStyle: {
+            //   height: 170,
+            // },
+            // headerBackground: () => (
+            //   <Image
+            //     style={StyleSheet.absoluteFill}
+            //     source={require("../assets/header-bg.png")}
+            //   />
+            // ),
           }}
         />
         <Tab.Screen

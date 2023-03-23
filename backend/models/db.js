@@ -13,4 +13,5 @@ mongoose.connect(uri, { useNewUrlParser: true }, (err) => {
 require('./temperature.model');
 require("./humidity.model");
 require("./light.model");
-require("./soil_moisture.model")
+require("./soil_moisture.model");
+require("./explore.model");
