@@ -4,7 +4,7 @@
 
 ```bash
 $ cd backend
-$ npm build
+$ npm install
 $ npm start
 ```
 
