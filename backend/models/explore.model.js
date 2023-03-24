@@ -55,4 +55,4 @@ var exploreSchema = new mongoose.Schema({
     },
 });
 
-mongoose.model('Explore', exploreSchema);
+mongoose.model('Explores', exploreSchema);

@@ -10,7 +10,7 @@ const NotificationScreen = ({ navigation }) => {
         alignItems: "center",
       }}
     >
-      <Text onPress={() => navigation.navigate("Home")}>NOTI</Text>
+      <Text onPress={() => navigation.navigate("home")}>NOTI</Text>
     </View>
   );
 };

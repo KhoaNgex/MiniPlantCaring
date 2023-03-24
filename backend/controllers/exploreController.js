@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Explore = mongoose.model("Explore");
+const Explore = mongoose.model("Explores");
 
 const getAllExplorePlant = async (req, res) => {
   try {

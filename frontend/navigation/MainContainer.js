@@ -10,6 +10,7 @@ import ExploreScreen from "./screens/ExploreScreen";
 import NotificationScreen from "./screens/NotificationScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 
+
 // Screen names
 const homeName = "HOME";
 const exploreName = "EXPLORE";
@@ -66,43 +67,6 @@ const MainContainer = () => {
           component={ExploreScreen}
           options={{
             headerShown: false,
-          //   headerTitle: () => (
-          //     <View
-          //       style={{
-          //         paddingLeft: 15,
-          //       }}
-          //     >
-          //       <Text
-          //         style={{
-          //           color: "white",
-          //           fontSize: 23,
-          //           fontWeight: "500",
-          //         }}
-          //       >
-          //         Đề xuất
-          //       </Text>
-          //       <Text
-          //         style={{
-          //           color: "white",
-          //           fontSize: 14,
-          //           fontWeight: "200",
-          //           marginTop: 5,
-          //           marginBottom: 7,
-          //         }}
-          //       >
-          //         Làm sao để cây phát triển tốt?
-          //       </Text>
-          //     </View>
-            // ),
-            // headerStyle: {
-            //   height: 170,
-            // },
-            // headerBackground: () => (
-            //   <Image
-            //     style={StyleSheet.absoluteFill}
-            //     source={require("../assets/header-bg.png")}
-            //   />
-            // ),
           }}
         />
         <Tab.Screen
