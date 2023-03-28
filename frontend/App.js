@@ -1,10 +1,10 @@
 import React from "react";
-import MainContainer from "./navigation/MainContainer";
-
-
+import Main from "./navigation/main";
 
 export default function App() {
-  return <MainContainer />;
+  return (
+    <Main />
+  );
 }
 
 
