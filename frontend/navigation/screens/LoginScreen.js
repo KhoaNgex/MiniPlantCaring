@@ -10,17 +10,48 @@ import {
     ImageBackground,
     KeyboardAvoidingView,
     CheckBox,
+    Modal,
 } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+
+const userdata = [
+    {username: "khoanda", password: "khoanda"},
+    {username: "congtt", password: "congtt"},
+    {username: "khoacta", password: "khoacta"},
+    {username: "langunm", password: "langunm"}
+];
 
 const LoginScreen = ({navigation}) => {
 
-    const [data, setData] = useState();
+    // const [data, setData] = useState();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [eyeStatus, setEyeStatus] = useState(true);
     const [isSelected, setSelection] = useState(false);
+    const [isModalWrongPass, setIsModalWrongPass] = useState(false);
+
+    const handleMatchingAccount = () => {
+
+        // const account = {username: username, password: password};
+
+        const flag = userdata.filter(item => {
+            return (item.username === username) && (item.password === password)
+        })
+
+        console.log(flag);
+
+        if (flag.length != 0) {
+            alert("ABCD");
+        }
+        else {
+            handleModalWrongPass(true)
+        }
+        
+    }
+
+    const handleModalWrongPass = (status) => {
+        setIsModalWrongPass(status)
+    }
 
     const handleUsernameChange = (username) => {
         setUsername(username)
@@ -34,11 +65,12 @@ const LoginScreen = ({navigation}) => {
         setEyeStatus(!eyeStatus)
     }
 
+    console.log(isModalWrongPass);
     return (
         <View style={styles.container}>
             <TouchableOpacity 
                 style={styles.backBtn}
-                onPress={() => alert('ABC')}
+                onPress={() => navigation.navigate("StartScreen")}
             >
                 <ImageBackground 
                     source={require("../../assets/login-back.png")}
@@ -58,14 +90,6 @@ const LoginScreen = ({navigation}) => {
                 <Text style={styles.input_label}>
                     Tên đăng nhập
                 </Text>
-                    {/* <TextInput
-                        style={username != "" ? [styles.input_box, styles.borderColorImp] : [styles.input_box]}
-                        placeholder=""
-                        placeholderTextColor=""
-                        secureTextEntry={false}
-                        autoCapitalize="none"
-                        onChangeText={(username) => handleUsernameChange(username)}
-                    /> */}
                 <View style={styles.action}>
                     <TextInput
                         style={username != "" ? [styles.input_box, styles.borderColorImp] : [styles.input_box]}
@@ -73,7 +97,10 @@ const LoginScreen = ({navigation}) => {
                         placeholderTextColor=""
                         secureTextEntry={false}
                         autoCapitalize="none"
-                        onChangeText={(username) => handleUsernameChange(username)}
+                        onChangeText={(username) => {
+                            return handleUsernameChange(username);
+                        }}
+                        value={username}
                     />
                     
                     <View 
@@ -94,6 +121,7 @@ const LoginScreen = ({navigation}) => {
                         placeholderTextColor=""
                         secureTextEntry={eyeStatus}
                         onChangeText={(password) => handlePasswordChange(password)}
+                        value={password}
                     />
                     
                     <TouchableOpacity 
@@ -124,6 +152,7 @@ const LoginScreen = ({navigation}) => {
 
             <TouchableOpacity 
                 style={styles.loginBtn}
+                onPress={() => handleMatchingAccount()}
             >
                 <Text style={styles.loginText}>Đăng nhập</Text> 
             </TouchableOpacity>
@@ -147,19 +176,48 @@ const LoginScreen = ({navigation}) => {
                 >
             </View>
 
+            <Modal
+                transparent={true}
+                animationType="fade"
+                visible={isModalWrongPass}
+                onRequestClose={() => handleModalWrongPass(false)}
+            >
+                <Modal_WrongPass 
+                    _handleModalWrongPass={handleModalWrongPass}
+                />
+            </Modal>
         </View>
 
         
     );
 };
 
+const Modal_WrongPass = (_handleModalWrongPass) => {
+
+    return (
+            <TouchableOpacity 
+                style={modal_styles.modal_container}
+                onPress={() => {_handleModalWrongPass(false)}}
+            >
+                <View style={modal_styles.modal_box}>
+                    <Text style={modal_styles.modal_text}> Sai mật khẩu! </Text>
+                </View>
+            </TouchableOpacity>
+            
+    );
+    
+}
+
+const MODAL_HEIGHT = 40;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        backgroundColor: '#fff',
+        // justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 20,
-        marginRight: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     backBtn: {
         alignSelf: 'flex-start',
@@ -236,12 +294,12 @@ const styles = StyleSheet.create({
         color: "#6A6F7D",
         fontSize: 13,
         fontWeight: "200",
-        marginTop: 5,
+        marginTop: 10,
     },
     footer_line: {
         backgroundColor: "#E3E3E3",
         height: 5,
-        width: "35%",
+        width: 150,
         borderRadius: 70,
         marginTop: 5,
     },
@@ -279,6 +337,27 @@ const styles = StyleSheet.create({
     borderColorImp: {
         borderBottomColor: "#2DDA93",
     },
+});
+
+const modal_styles = StyleSheet.create({
+    modal_container: {
+        flex: 1,
+        alignItems: "center",
+    },
+    modal_box: {
+        height: MODAL_HEIGHT,
+        backgroundColor: "#f25c43",
+        borderRadius: 10,
+        marginTop: 40,
+        width: "80%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    modal_text: {
+        fontSize: 16,
+        color: "white",
+        fontWeight: 700,
+    }
 });
 
 export default LoginScreen;

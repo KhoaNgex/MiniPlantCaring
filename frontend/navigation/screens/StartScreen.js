@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { 
     StyleSheet,
     Text,
@@ -32,18 +32,19 @@ const StartScreen = ({navigation}) => {
                 style={styles.center_image}
             >
             </Image>
+            <View style={styles.center_content}>
+                <Text
+                    style={styles.center_text}
+                    >
+                    Thông minh, đơn giản và nhanh chóng!
+                </Text>
 
-            <Text
-                style={styles.center_text}
-                >
-                Thông minh, đơn giản và nhanh chóng!
-            </Text>
-
-            <Text
-                style={styles.center_subtext}
-                >
-                Ứng dụng hỗ trợ chăm sóc cây trồng sử dụng IoT
-            </Text>
+                <Text
+                    style={styles.center_subtext}
+                    >
+                    Ứng dụng hỗ trợ chăm sóc cây trồng sử dụng IoT
+                </Text>
+            </View>
             
             <TouchableOpacity 
                 style={styles.startBtn}
@@ -68,9 +69,13 @@ const StartScreen = ({navigation}) => {
     );
 };
 
+const IMAGE_HEIGHT = 213.33;
+const IMAGE_WIDTH = 200;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        display: "flex",
         backgroundColor: '#fff',
         alignItems: 'center',
         // justifyContent: 'center',
@@ -78,7 +83,6 @@ const styles = StyleSheet.create({
     header_image: {
         height: 50,
         width: "100%",
-        zIndex: 10,
     },
     header_text: {
         color: "#61D2C4",
@@ -89,8 +93,13 @@ const styles = StyleSheet.create({
     },
     center_image: {
         marginTop: 30,
-        width: 200,
-        height: 211,
+        width: IMAGE_WIDTH,
+        height: IMAGE_HEIGHT,
+    },
+    center_content: {
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
     },
     center_text: {
         color: "#36455A",
@@ -102,22 +111,25 @@ const styles = StyleSheet.create({
         color: "#6A6F7D",
         fontSize: 13,
         fontWeight: "200",
-        marginTop: 20,
-        fontStyle: "italic",
+        marginTop: 15,
+        textAlign: "center",
     },
     startBtn: {
         width: "85%",
-        marginTop: 50,
         borderRadius: 3,
         textAlign: "center",
         backgroundColor: "#2DDA93",
+        display: "flex",
+        height: 60,
+        marginTop: 35,
     },
     startText: {
         color: "white",
         fontSize: 20,
         fontWeight: "500",
-        paddingTop: 20,
-        paddingBottom: 20,
+        justifyContent: "center",
+        alignContent: "center",
+        padding: 15,
     },
     footer_text: {
         color: "#6A6F7D",
@@ -127,12 +139,12 @@ const styles = StyleSheet.create({
     footer_line: {
         backgroundColor: "#E3E3E3",
         height: 5,
-        width: "35%",
+        width: 150,
         borderRadius: 70,
         marginTop: 5,
     },
     space: {
-        height: 130,
+        height: 155,
     },
 });
 
