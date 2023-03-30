@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
     StyleSheet,
     Text,
@@ -41,17 +41,40 @@ const LoginScreen = ({navigation}) => {
         console.log(flag);
 
         if (flag.length != 0) {
-            alert("ABCD");
+            navigation.navigate("MainContainer");
         }
         else {
-            handleModalWrongPass(true)
+            handleModalWrongPass(true);
         }
         
     }
 
+    console.log(isModalWrongPass);
+
     const handleModalWrongPass = (status) => {
         setIsModalWrongPass(status)
+        if (status === true) {
+            const timeoutId = setTimeout(() => {
+                setIsModalWrongPass(false);
+            }, 1000)
+        }
     }
+
+    // Don't fix
+    // const handleModalWrongPass = (status) => {
+    //     setIsModalWrongPass(status)
+    //     if (status === true) {
+    //         useEffect(() => {
+    //             const timeoutId = setTimeout(() => {
+    //                 setIsModalWrongPass(false);
+    //             }, 1000)
+
+    //             return function cleanup () {
+    //                 clearTimeout(timeoutId);
+    //             }
+    //         });
+    //     }
+    // }
 
     const handleUsernameChange = (username) => {
         setUsername(username)
@@ -65,7 +88,22 @@ const LoginScreen = ({navigation}) => {
         setEyeStatus(!eyeStatus)
     }
 
-    console.log(isModalWrongPass);
+    const Modal_WrongPass = () => {
+
+        return (
+                <TouchableOpacity 
+                    style={modal_styles.modal_container}
+                    onPress={() => {handleModalWrongPass(false)}}
+                >
+                    <View style={modal_styles.modal_box}>
+                        <Text style={modal_styles.modal_text}> Sai mật khẩu! </Text>
+                    </View>
+                </TouchableOpacity>
+                
+        );
+        
+    }
+
     return (
         <View style={styles.container}>
             <TouchableOpacity 
@@ -182,9 +220,7 @@ const LoginScreen = ({navigation}) => {
                 visible={isModalWrongPass}
                 onRequestClose={() => handleModalWrongPass(false)}
             >
-                <Modal_WrongPass 
-                    _handleModalWrongPass={handleModalWrongPass}
-                />
+                <Modal_WrongPass />
             </Modal>
         </View>
 
@@ -192,21 +228,21 @@ const LoginScreen = ({navigation}) => {
     );
 };
 
-const Modal_WrongPass = (_handleModalWrongPass) => {
+// const Modal_WrongPass = (_handleModalWrongPass) => {
 
-    return (
-            <TouchableOpacity 
-                style={modal_styles.modal_container}
-                onPress={() => {_handleModalWrongPass(false)}}
-            >
-                <View style={modal_styles.modal_box}>
-                    <Text style={modal_styles.modal_text}> Sai mật khẩu! </Text>
-                </View>
-            </TouchableOpacity>
+//     return (
+//             <TouchableOpacity 
+//                 style={modal_styles.modal_container}
+//                 onPress={() => {_handleModalWrongPass(false)}}
+//             >
+//                 <View style={modal_styles.modal_box}>
+//                     <Text style={modal_styles.modal_text}> Sai mật khẩu! </Text>
+//                 </View>
+//             </TouchableOpacity>
             
-    );
+//     );
     
-}
+// }
 
 const MODAL_HEIGHT = 40;
 
