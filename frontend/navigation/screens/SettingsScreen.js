@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Pressable, StyleSheet, Text } from "react-native";
 
-const SettingsScreen = () => {
+const SettingsScreen = ({navigation}) => {
+
   return (
     <View style={styles.container}>
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button}
+        onPress={() => navigation.navigate('StartScreen')}
+      >
         <Text style={styles.text}>Đăng xuất</Text>
       </Pressable>
     </View>

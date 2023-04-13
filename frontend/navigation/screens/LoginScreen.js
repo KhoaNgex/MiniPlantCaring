@@ -49,8 +49,6 @@ const LoginScreen = ({navigation}) => {
         
     }
 
-    console.log(isModalWrongPass);
-
     const handleModalWrongPass = (status) => {
         setIsModalWrongPass(status)
         if (status === true) {
