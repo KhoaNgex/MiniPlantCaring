@@ -10,7 +10,6 @@ import ExploreScreen from "./screens/ExploreScreen";
 import NotificationScreen from "./screens/NotificationScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 
-
 // Screen names
 const homeName = "HOME";
 const exploreName = "EXPLORE";
@@ -21,7 +20,7 @@ const Tab = createBottomTabNavigator();
 
 const MainContainer = () => {
   return (
-    <NavigationContainer>
+    // <NavigationContainer>
       <Tab.Navigator
         initialRouteName={homeName}
         screenOptions={({ route }) => ({
@@ -69,7 +68,7 @@ const MainContainer = () => {
             headerShown: false,
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name={notiName}
           component={NotificationScreen}
           options={{
@@ -110,6 +109,13 @@ const MainContainer = () => {
               />
             ),
           }}
+        /> */}
+        <Tab.Screen
+          name={notiName}
+          component={NotificationScreen}
+          options={{
+            headerShown: false,
+          }}
         />
         <Tab.Screen
           name={settingName}
@@ -125,7 +131,7 @@ const MainContainer = () => {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
   );
 };
 
