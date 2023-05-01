@@ -23,9 +23,7 @@ const StartScreen = ({navigation}) => {
 
             <Text
                 style={styles.header_text}
-            >
-                Plant Smart
-            </Text>
+            >Plant Smart</Text>
 
             <Image
                 source={require("../../assets/start-image.png")}
@@ -35,15 +33,11 @@ const StartScreen = ({navigation}) => {
             <View style={styles.center_content}>
                 <Text
                     style={styles.center_text}
-                    >
-                    Thông minh, đơn giản và nhanh chóng!
-                </Text>
+                    >Thông minh, đơn giản và nhanh chóng!</Text>
 
                 <Text
                     style={styles.center_subtext}
-                    >
-                    Ứng dụng hỗ trợ chăm sóc cây trồng sử dụng IoT
-                </Text>
+                    >Ứng dụng hỗ trợ chăm sóc cây trồng sử dụng IoT</Text>
             </View>
             
             <TouchableOpacity 
@@ -53,18 +47,15 @@ const StartScreen = ({navigation}) => {
                 <Text style={styles.startText}>Bắt đầu thôi!</Text> 
             </TouchableOpacity>
 
-            <View style={styles.space}> </View>
+            <View style={styles.space}></View>
 
             <Text
                 style={styles.footer_text}
-                >
-                Được phát triển bởi LCKK Team
-            </Text>
+                >Được phát triển bởi LCKK Team</Text>
 
             <View
                 style={styles.footer_line}
-                >
-            </View>
+                ></View>
         </View>
     );
 };
@@ -78,7 +69,6 @@ const styles = StyleSheet.create({
         display: "flex",
         backgroundColor: '#fff',
         alignItems: 'center',
-        // justifyContent: 'center',
     },
     header_image: {
         height: 50,
@@ -89,7 +79,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         fontWeight: "700",
         marginTop: 30,
-        textTransform: "uppercase"
+        textTransform: "uppercase",
     },
     center_image: {
         marginTop: 30,
@@ -128,7 +118,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "500",
         justifyContent: "center",
-        alignContent: "center",
+        alignSelf: "center",
         padding: 15,
     },
     footer_text: {
