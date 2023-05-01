@@ -10,6 +10,7 @@ const humidityRouter = require("./routes/humidityRoutes");
 const lightRouter = require("./routes/lightRoutes");
 const soil_moistureRouter = require("./routes/soil_moistureRoutes");
 const explore_plantRouter = require("./routes/exploreplantRoutes");
+const accountRouter = require("./routes/accountRoutes");
 
 var app = express();
 
@@ -33,6 +34,8 @@ app.use("/humidity", humidityRouter);
 app.use("/light", lightRouter);
 app.use("/soil_moisture", soil_moistureRouter);
 app.use("/explore", explore_plantRouter);
+app.use("/account", accountRouter);
+
 
 
 

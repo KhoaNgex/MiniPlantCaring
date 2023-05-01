@@ -12,36 +12,58 @@ import {
     Modal,
 } from "react-native";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import CheckBox from '@react-native-community/checkbox';
+// import CheckBox from '@react-native-community/checkbox';
+import CheckBox from "expo-checkbox";
+import axios from "axios";
 
-const userdata = [
-    {username: "khoanda", password: "khoanda"},
-    {username: "congtt", password: "congtt"},
-    {username: "khoacta", password: "khoacta"},
-    {username: "langunm", password: "langunm"}
-];
+// const userdata = [
+//     {username: "khoanda", password: "khoanda"},
+//     {username: "congtt", password: "congtt"},
+//     {username: "khoacta", password: "khoacta"},
+//     {username: "langunm", password: "langunm"}
+// ];
 
 const LoginScreen = ({navigation}) => {
+    const [userdata, setAccountLists] = useState([]);
+
+    const timeout = setTimeout(()=>{
+        axios
+        .get("http://192.168.1.7:3000/account/getAll")
+        .then((response) => {setAccountLists(response.data)})
+        .catch((error) => console.error(error));   
+    }, 1000);
+
+    if(userdata.length > 0) {
+        clearTimeout(timeout);
+    }
+    
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [eyeStatus, setEyeStatus] = useState(true);
     const [isSelected, setSelection] = useState(false);
     const [isModalWrongPass, setIsModalWrongPass] = useState(false);
+    const [isModalWrongUsername, setIsModalWrongUsername] = useState(false);
 
     const handleMatchingAccount = () => {
-
-        const flag = userdata.filter(item => {
-            return (item.username === username) && (item.password === password)
+        const flagUsername = userdata.filter(item => {
+            return (item.username === username)
         })
-
-        if (flag.length != 0) {
-            navigation.navigate("MainContainer");
+        if (flagUsername.length == 0) {
+            handleModalWrongUsername(true);
         }
         else {
-            handleModalWrongPass(true);
+            const flag = userdata.filter(item => {
+                return (item.username === username) && (item.password === password)
+            })
+    
+            if (flag.length != 0) {
+                navigation.navigate("MainContainer");
+            }
+            else {
+                handleModalWrongPass(true);
+            }
         }
-        
     }
 
     const handleModalWrongPass = (status) => {
@@ -49,6 +71,15 @@ const LoginScreen = ({navigation}) => {
         if (status === true) {
             const timeoutId = setTimeout(() => {
                 setIsModalWrongPass(false);
+            }, 1000)
+        }
+    }
+
+    const handleModalWrongUsername = (status) => {
+        setIsModalWrongUsername(status)
+        if (status === true) {
+            const timeoutId = setTimeout(() => {
+                setIsModalWrongUsername(false);
             }, 1000)
         }
     }
@@ -79,6 +110,23 @@ const LoginScreen = ({navigation}) => {
                 >
                     <View style={modal_styles.modal_box}>
                         <Text style={modal_styles.modal_text}>Sai mật khẩu!</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        );
+        
+    }
+
+    const Modal_WrongUsername = () => {
+
+        return (
+            <View>
+                <TouchableOpacity 
+                    style={modal_styles.modal_container}
+                    onPress={() => {handleModalWrongUsername(false)}}
+                >
+                    <View style={modal_styles.modal_box}>
+                        <Text style={modal_styles.modal_text}>Tên đăng nhập không đúng!</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -180,6 +228,15 @@ const LoginScreen = ({navigation}) => {
                 onRequestClose={() => handleModalWrongPass(false)}
             >
                 <Modal_WrongPass />
+            </Modal>
+
+            <Modal
+                transparent={true}
+                animationType="fade"
+                visible={isModalWrongUsername}
+                onRequestClose={() => handleModalWrongUsername(false)}
+            >
+                <Modal_WrongUsername />
             </Modal>
         </View>
 
