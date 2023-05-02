@@ -28,9 +28,11 @@ const LoginScreen = ({navigation}) => {
 
     const timeout = setTimeout(()=>{
         axios
-        .get("http://192.168.1.7:3000/account/getAll")
-        .then((response) => {setAccountLists(response.data)})
-        .catch((error) => console.error(error));   
+          .get("http://192.168.1.4:3000/account/getAll")
+          .then((response) => {
+            setAccountLists(response.data);
+          })
+          .catch((error) => console.error(error));   
     }, 1000);
 
     if(userdata.length > 0) {
@@ -188,14 +190,6 @@ const LoginScreen = ({navigation}) => {
                 </View>
                 
                 <View style={styles.tools}>
-                    <View style={styles.checkbox_container}>
-                        <CheckBox
-                            style={styles.checkbox}
-                            value={isSelected}
-                            onValueChange={() => handleisSelected()}
-                        />
-                        <Text style={styles.checkbox_label}>Lưu mật khẩu</Text>
-                    </View>
                     <Text style={styles.forgotpass}>Quên mật khẩu?</Text>
                 </View>
             </View>
@@ -283,7 +277,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        width: "auto",
+        width: 300,
         marginTop: 20,
         marginLeft: 20,
         marginRight: 20,
@@ -293,7 +287,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "200",
         marginTop: 20,
-        marginLeft: -20,
+        marginLeft: -15
     },
     input_box: {
         borderWidth: 0.5,
@@ -367,6 +361,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         width: "100%",
+        marginLeft: -15
     },
     visibility: {
         display: "flex",

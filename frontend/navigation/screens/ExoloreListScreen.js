@@ -37,7 +37,7 @@ const PlantList = ({ navigation }) => {
 
   const timeout = setTimeout(()=>{
     axios
-      .get("http://192.168.1.7:3000/explore/getAll")
+      .get("http://192.168.1.4:3000/explore/getAll")
       .then((response) => {setPlantlists(response.data)})
       .catch((error) => console.error(error));   
   }, 1000);

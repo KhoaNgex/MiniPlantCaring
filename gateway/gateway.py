@@ -71,15 +71,10 @@ def message(client, feed_id, payload):
             print('Received Soil Moisture Out Of Range!')
 
 client = MQTTClient(AIO_USERNAME, AIO_KEY)
-
-# Setup the callback functions defined above.
 client.on_connect    = connected
 client.on_disconnect = disconnected
 client.on_message    = message
 client.on_subscribe  = subscribe
 
-# Connect to the Adafruit IO server.
 client.connect()
-
-# Start a message loop that blocks forever waiting for MQTT messages to be received.
 client.loop_blocking()
