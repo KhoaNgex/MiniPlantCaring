@@ -201,7 +201,7 @@ const LoginScreen = ({navigation}) => {
             </TouchableOpacity>
 
             <Text
-                style={styles.footer_text}
+                style={styles.contact_text}
                 >Liên hệ hỗ trợ: <Text style={{color: "#2DDA93", fontWeight: "500"}}>0123456789</Text></Text>
             <View style={styles.space}></View>
 
@@ -322,18 +322,26 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "500",
     },
-    footer_text: {
+    contact_text: {
         color: "#6A6F7D",
         fontSize: 13,
         fontWeight: "200",
         marginTop: 10,
+    },
+    footer_text: {
+        color: "#6A6F7D",
+        fontSize: 13,
+        fontWeight: "200",
+        position: 'absolute',
+        bottom: 15,
     },
     footer_line: {
         backgroundColor: "#E3E3E3",
         height: 5,
         width: 150,
         borderRadius: 70,
-        marginTop: 5,
+        position: 'absolute',
+        bottom: 5,
     },
     checkbox_container: {
         display: "flex",

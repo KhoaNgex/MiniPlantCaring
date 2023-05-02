@@ -125,6 +125,8 @@ const styles = StyleSheet.create({
         color: "#6A6F7D",
         fontSize: 13,
         fontWeight: "200",
+        position: 'absolute',
+        bottom: 15,
     },
     footer_line: {
         backgroundColor: "#E3E3E3",
@@ -132,6 +134,8 @@ const styles = StyleSheet.create({
         width: 150,
         borderRadius: 70,
         marginTop: 5,
+        position: 'absolute',
+        bottom: 5,
     },
     space: {
         height: 155,
