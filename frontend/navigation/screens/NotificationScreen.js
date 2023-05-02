@@ -12,6 +12,42 @@ import {
   Switch,
   FlatList,
 } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import axios from "axios";
+
+const Item = ({notiInfor}) => {
+
+  if (notiInfor.notiType == "update") {
+    return (
+      <View style={styles.notiItemContainer}>
+        <Text style={styles.notiItemHeader}>[Cập nhật] Dữ liệu cây <Text style={{color: "#33E49B"}}>{notiInfor.plantName}</Text></Text>
+        <Text style={{color: "grey", fontSize: 10, marginTop: 5}}>{notiInfor.notiDate}</Text>
+        <View style={styles.newConditionContainer}>
+          <View style={styles.newCondition}>
+            <Text style={{fontSize: 14}}><Ionicons name="sunny-sharp" color="#2DDA93" size={16} /> {notiInfor.newCondition[0]}</Text>
+          </View>
+          <View style={styles.newCondition}>
+            <Text style={{fontSize: 14}}><Ionicons name="rainy-outline" color="#2DDA93" size={16} /> {notiInfor.newCondition[1]}</Text>
+          </View>
+          <View style={styles.newCondition}>
+            <Text style={{fontSize: 14}}><Ionicons name="water-outline" color="#2DDA93" size={16} /> {notiInfor.newCondition[2]}</Text>
+          </View>
+          <View style={styles.newCondition}>
+            <Text style={{fontSize: 14}}><Ionicons name="thermometer-outline" color="#2DDA93" size={16} /> {notiInfor.newCondition[3]}</Text>
+          </View>
+        </View>
+      </View>
+    )
+  } else {
+    return (
+      <View style={styles.notiItemContainer}>
+        <Text style={styles.notiItemHeader}>[Cảnh báo] Cây <Text style={{color: "#33E49B"}}>{notiInfor.plantName}</Text> {notiInfor.noti}</Text>
+        <Text style={{color: "grey", fontSize: 10, marginTop: 5}}>{notiInfor.notiDate}</Text>
+        <Text style={{color: "#36455A", fontSize: 12, marginTop: 5}}>Cây {notiInfor.plantName} đang có {notiInfor.problem}. {notiInfor.solution}</Text>
+      </View>
+    )
+  }
+};
 
 const NotificationScreen = () => {
 
@@ -21,26 +57,18 @@ const NotificationScreen = () => {
     setIsEnabled(!isEnabled)
   }
 
-  const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    }
-  ];
+  const [notiLists, setNotiLists] = useState([]);
 
-  const Item = ({title}) => (
-    <View>
-      <Text>{title}</Text>
-    </View>
-  );
+    const timeout = setTimeout(()=>{
+        axios
+        .get("http://192.168.1.7:3000/notification/getAll")
+        .then((response) => {setNotiLists(response.data)})
+        .catch((error) => console.error(error));   
+    }, 1000);
+
+    if(notiLists.length > 0) {
+        clearTimeout(timeout);
+    }
 
   return (
     <View style={styles.container}>
@@ -49,23 +77,23 @@ const NotificationScreen = () => {
           <Image source={require("../../assets/header-bg.png")} style={styles.headerImg}/>
           <Text style={{
             color: "white",
-            fontSize: 30,
+            fontSize: 23,
             fontWeight: "500",
             position: "absolute",
             top: 0,
-            marginTop: 60,
+            marginTop: 58,
             marginLeft: 30,
           }}>Thông báo</Text>
 
           <Text
             style={{
-            color: "white",
-            fontSize: 15,
-            fontWeight: "200",
-            position: "absolute",            
-            top: 0,
-            marginTop: 100,
-            marginLeft: 30,
+              color: "white",
+              fontSize: 14,
+              fontWeight: "200",
+              position: "absolute",            
+              top: 0,
+              marginTop: 100,
+              marginLeft: 30,
           }}>Nắm bắt tình hình nhanh chóng!</Text>
         </View>
           
@@ -83,19 +111,19 @@ const NotificationScreen = () => {
         </View>
 
         <FlatList
-        data={DATA}
-        renderItem={({item}) => <Item title={item.title} />}
-        keyExtractor={item => item.id}
+          style={styles.notiList}
+          data={notiLists}
+          renderItem={({item}) => <Item notiInfor={item} />}
+          keyExtractor={item => item._id}
         />
-
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "flex-start",
+    // flex: 1,
+    // justifyContent: "flex-start",
     // alignItems: "center",
   },
   header: {
@@ -126,6 +154,37 @@ const styles = StyleSheet.create({
   toggle_btn: {
     alignSelf: "center",
   },
+  notiList: {
+    width: "100%",
+    marginTop: 20,
+    marginBottom: 280
+  },
+  notiItemContainer: {
+    width: "90%",
+    height: 120,
+    backgroundColor: "#fff",
+    marginBottom: 15,
+    marginLeft: "5%",
+    borderRadius: 10,
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    shadowOffset: {width: 0, height: 0},
+    padding: 10,
+  },
+  notiItemHeader: {
+    fontWeight: "bold",
+  },
+  newConditionContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 15
+  },
+  newCondition: {
+    marginRight: 15
+  }
 });
 
 export default NotificationScreen;

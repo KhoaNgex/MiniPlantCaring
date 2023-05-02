@@ -16,13 +16,6 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import CheckBox from "expo-checkbox";
 import axios from "axios";
 
-// const userdata = [
-//     {username: "khoanda", password: "khoanda"},
-//     {username: "congtt", password: "congtt"},
-//     {username: "khoacta", password: "khoacta"},
-//     {username: "langunm", password: "langunm"}
-// ];
-
 const LoginScreen = ({navigation}) => {
     const [userdata, setAccountLists] = useState([]);
 

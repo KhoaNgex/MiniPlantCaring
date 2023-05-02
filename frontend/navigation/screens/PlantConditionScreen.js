@@ -42,7 +42,7 @@ const ConditionCards = () => {
         .then((response) => setLightData(response.data))
         .then(setLight(lightData[0]["value"]))
         .catch((error) => console.error(error));
-    }, 10000);
+    }, 1000);
 
     // Cleanup function to clear timeout
     return () => clearTimeout(timeout);

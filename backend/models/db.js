@@ -16,3 +16,4 @@ require("./light.model");
 require("./soil_moisture.model");
 require("./explore.model");
 require("./account.model");
+require("./notification.model");
