@@ -22,7 +22,7 @@ $ expo start
   * Command on terminal:
 ```bash
 $ cd frontend
-$ yarn build
+$ yarn install
 $ expo start
 ```
    Then, press w on keyboard and enter http://localhost:19006/
