@@ -23,7 +23,7 @@ const Plantitem = ({plantinfor, navigation}) => {
         <Image style={styles.plantImg} source={{uri: plantinfor.mainImage}}/>
         <Text style={styles.plantName}>{plantinfor.plantName}</Text>
       </View>
-      </TouchableOpacity>
+    </TouchableOpacity>
   )
 }
 
@@ -95,7 +95,7 @@ const PlantList = ({ navigation }) => {
           numColumns={2}
           renderItem={({item}) => <Plantitem plantinfor={item} navigation = { navigation } />}
           keyExtractor={item => item._id}
-        />
+      />
     </View>      
   );
 }
