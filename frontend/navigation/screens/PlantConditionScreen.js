@@ -13,10 +13,10 @@ import axios from "axios";
 
 import { LineChart } from "react-native-chart-kit";
 
-const apitemp = "http://192.168.1.4:3000/temperature/getAll";
-const apisoil = "http://192.168.1.4:3000/soil_moisture/getAll";
-const apihumi = "http://192.168.1.4:3000/humidity/getAll";
-const apilight = "http://192.168.1.4:3000/light/getAll";
+const apitemp = "http://localhost:3000/temperature/getAll";
+const apisoil = "http://localhost:3000/soil_moisture/getAll";
+const apihumi = "http://localhost:3000/humidity/getAll";
+const apilight = "http://localhost:3000/light/getAll";
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -122,22 +122,22 @@ const ConditionCards = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       axios
-        .get("http://192.168.1.4:3000/temperature/getLast")
+        .get("http://localhost:3000/temperature/getLast")
         .then((response) => setTempData(response.data))
         .then(setTemperature(tempData[0]["value"]))
         .catch((error) => console.error(error));
       axios
-        .get("http://192.168.1.4:3000/soil_moisture/getLast")
+        .get("http://localhost:3000/soil_moisture/getLast")
         .then((response) => setSoilData(response.data))
         .then(setSoil_moisture(soilData[0]["value"]))
         .catch((error) => console.error(error));
       axios
-        .get("http://192.168.1.4:3000/humidity/getLast")
+        .get("http://localhost:3000/humidity/getLast")
         .then((response) => setHumiData(response.data))
         .then(setHumidity(humiData[0]["value"]))
         .catch((error) => console.error(error));
       axios
-        .get("http://192.168.1.4:3000/light/getLast")
+        .get("http://localhost:3000/light/getLast")
         .then((response) => setLightData(response.data))
         .then(setLight(lightData[0]["value"]))
         .catch((error) => console.error(error));

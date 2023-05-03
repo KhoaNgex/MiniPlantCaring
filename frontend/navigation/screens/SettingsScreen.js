@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, Pressable, StyleSheet, Text } from "react-native";
 
 const SettingsScreen = ({navigation}) => {
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#e6e6eb",
     marginTop: 5,
     width: "80%",
+    marginTop: 10,
   },
   text: {
     fontSize: 16,

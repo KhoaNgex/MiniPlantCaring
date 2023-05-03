@@ -21,7 +21,7 @@ const LoginScreen = ({navigation}) => {
 
     const timeout = setTimeout(()=>{
         axios
-          .get("http://192.168.1.4:3000/account/getAll")
+          .get("http://localhost:3000/account/getAll")
           .then((response) => {
             setAccountLists(response.data);
           })

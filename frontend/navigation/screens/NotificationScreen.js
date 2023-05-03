@@ -56,7 +56,7 @@ const NotificationScreen = () => {
 
     const timeout = setTimeout(()=>{
         axios
-        .get("http://192.168.1.4:3000/notification/getAll")
+        .get("http://localhost:3000/notification/getAll")
         .then((response) => {setNotiLists(response.data)})
         .catch((error) => console.error(error));   
     }, 1000);
