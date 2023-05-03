@@ -24,7 +24,7 @@ SOIL_LOWER_BOUND = 0
 
 AIO_FEED_ID = ["TEMP", "HUMI", "LIGHT", "SOIL"]
 AIO_USERNAME = "langung"
-AIO_KEY = "aio_oiBI50zQ17Lju7KPAEd6GdvXsjRQ"
+AIO_KEY = "aio_uQlL44Pook9QBxcCrBWmdqncSeQv"
 
 temp, humi, light, soil = None, None, None, None
 
