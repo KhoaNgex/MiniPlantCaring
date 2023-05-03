@@ -121,13 +121,14 @@ const MainContainer = () => {
           name={settingName}
           component={SettingsScreen}
           options={{
-            title: "SETTING",
-            headerStyle: {
-              backgroundColor: "#34D79A",
-            },
-            headerTitleStyle: {
-              color: "white",
-            },
+            // title: "SETTING",
+            // headerStyle: {
+            //   backgroundColor: "#34D79A",
+            // },
+            // headerTitleStyle: {
+            //   color: "white",
+            // },
+            headerShown: false,
           }}
         />
       </Tab.Navigator>
