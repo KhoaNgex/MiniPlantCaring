@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
     StyleSheet,
     Text,
@@ -8,158 +8,94 @@ import {
     Button,
     TouchableOpacity,
     ImageBackground,
-    KeyboardAvoidingView,
+    Dimensions,
     Modal,
 } from "react-native";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import CheckBox from '@react-native-community/checkbox';
 
-const userdata = [
-    {username: "khoanda", password: "khoanda"},
-    {username: "congtt", password: "congtt"},
-    {username: "khoacta", password: "khoacta"},
-    {username: "langunm", password: "langunm"}
-];
 
-const LoginScreen = ({navigation}) => {
+const ValidationScreen = ({navigation}) => {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [eyeStatus, setEyeStatus] = useState(true);
-    const [isSelected, setSelection] = useState(false);
-    const [isModalWrongPass, setIsModalWrongPass] = useState(false);
+    const [otp, setOtp] = useState('');
+    const [isNotFill, setIsNotFill] = useState(false);
 
-    const handleMatchingAccount = () => {
-
-        const flag = userdata.filter(item => {
-            return (item.username === username) && (item.password === password)
-        })
-
-        if (flag.length != 0) {
-            navigation.navigate("MainContainer");
-        }
-        else {
-            handleModalWrongPass(true);
-        }
-        
+    const handleOtpChange = (otp) => {
+        setOtp(otp)
     }
 
-    const handleModalWrongPass = (status) => {
-        setIsModalWrongPass(status)
-        if (status === true) {
+    const handleCheckingFill = () => {
+        if (otp === "") {
+            setIsNotFill(true)
             const timeoutId = setTimeout(() => {
-                setIsModalWrongPass(false);
+                setIsNotFill(false);
             }, 1000)
         }
+        else {
+            navigation.navigate("ChangePassScreen")
+        }
     }
 
-    const handleUsernameChange = (username) => {
-        setUsername(username)
-    }
-
-    const handlePasswordChange = (password) => {
-        setPassword(password)
-    }
-
-    const handleEyeStatus = () => {
-        setEyeStatus(!eyeStatus)
-    }
-
-    const handleisSelected = () => {
-        setSelection(!isSelected)
-    }
-
-    const Modal_WrongPass = () => {
+    const Modal_NotFill = () => {
 
         return (
             <View>
                 <TouchableOpacity 
                     style={modal_styles.modal_container}
-                    onPress={() => {handleModalWrongPass(false)}}
+                    onPress={() => {setIsNotFill(false)}}
                 >
                     <View style={modal_styles.modal_box}>
-                        <Text style={modal_styles.modal_text}>Sai mật khẩu!</Text>
+                        <Text style={modal_styles.modal_text}>Bạn chưa điền mã xác nhận</Text>
                     </View>
                 </TouchableOpacity>
             </View>
         );
     }
 
-    const handleForgotPass = () => {
-        navigation.navigate("ForgotPassScreen")
-    }
 
     return (
         <View style={styles.container}>
             <TouchableOpacity 
                 style={styles.backBtn}
-                onPress={() => navigation.navigate("StartScreen")}
+                onPress={() => navigation.navigate("ForgotPassScreen")}
             >
                 <FontAwesomeIcon name="chevron-left" color="#6A6F7D" size={30} />
             </TouchableOpacity>
 
-            <Text style={styles.header_text}>Xin chào</Text>
+            <Text style={styles.header_text}>Quên mật khẩu?</Text>
 
-            <Text style={styles.header_subtext}>Đăng nhập để chăm sóc cây nào!</Text>
+            <Text style={styles.header_subtext}>Nhanh chóng, đơn giản</Text>
 
             <View style={styles.input_container}>
-                <Text style={styles.input_label}>Tên đăng nhập</Text>
+                <Text style={styles.input_label}>Mã xác nhận</Text>
                 <View style={styles.action}>
                     <TextInput
-                        style={username != "" ? [styles.input_box, styles.borderColorImp] : [styles.input_box]}
+                        style={otp != "" ? [styles.input_box, styles.borderColorImp] : [styles.input_box]}
                         placeholder=""
                         placeholderTextColor=""
                         secureTextEntry={false}
                         autoCapitalize="none"
-                        onChangeText={(username) => handleUsernameChange(username)}
-                        value={username}
+                        onChangeText={(otp) => handleOtpChange(otp)}
+                        value={otp}
                     />
-                    
-                    <View 
-                        style={styles.visibility}
-                    >
-                        <FontAwesomeIcon name={username != "" ? "check" : "remove"} color={username != "" ? "#2DDA93" : "gray"} size={30} />
-                    </View>
                 </View>
+                <Text style={styles.input_note}>Nhập mã xác nhận đã được gửi tới số điện thoại</Text>
 
-                <Text style={styles.input_label}>Mật khẩu</Text>
-
-                <View style={styles.action}>
-                    <TextInput
-                        style={!eyeStatus ? [styles.input_box, styles.borderColorImp] : [styles.input_box]}
-                        placeholder=""
-                        placeholderTextColor=""
-                        secureTextEntry={eyeStatus}
-                        onChangeText={(password) => handlePasswordChange(password)}
-                        value={password}
-                    />
-                    
-                    <TouchableOpacity 
-                        style={styles.visibility}
-                        onPress={() => handleEyeStatus()}
-                    >
-                        <FontAwesomeIcon name={eyeStatus ? "eye-slash" : "eye"} color={eyeStatus ? "#6A6F7D" : "#2DDA93"} size={30} />
+                <View style={styles.resend_container}>
+                    <Text style={styles.resend_label}>Nếu chưa nhận được mã</Text>
+                    <TouchableOpacity style={styles.resendBtn}>
+                        <Text style={styles.resend_text}>Gửi lại mã</Text> 
                     </TouchableOpacity>
                 </View>
+
                 
-                <View style={styles.tools}>
-                    {/* <View style={styles.checkbox_container}>
-                        <Text style={styles.checkbox_label}>Lưu mật khẩu</Text>
-                    </View> */}
-                    <TouchableOpacity 
-                        style={styles.forgotpass_container}
-                        onPress={() => handleForgotPass()}
-                    >
-                        <Text style={styles.forgotpass_label}>Quên mật khẩu?</Text>
-                    </TouchableOpacity>
-                </View>
+                
             </View>
 
             <TouchableOpacity 
                 style={styles.loginBtn}
-                onPress={() => handleMatchingAccount()}
+                onPress={() => handleCheckingFill()}
             >
-                <Text style={styles.loginText}>Đăng nhập</Text> 
+                <Text style={styles.loginText}>Xác nhận</Text> 
             </TouchableOpacity>
 
             <Text
@@ -179,10 +115,10 @@ const LoginScreen = ({navigation}) => {
             <Modal
                 transparent={true}
                 animationType="fade"
-                visible={isModalWrongPass}
-                onRequestClose={() => handleModalWrongPass(false)}
+                visible={isNotFill}
+                // onRequestClose={() => handleModalWrongPass(false)}
             >
-                <Modal_WrongPass />
+                <Modal_NotFill />
             </Modal>
         </View>
 
@@ -251,6 +187,39 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: "#36455A",
         width: "100%",
+    },
+    input_note: {
+        marginTop: 3,
+        color: "#6A6F7D",
+        fontStyle: "italic",
+        fontSize: 12,
+    },
+    resend_container: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: 30,
+        width: "100%",
+    },
+    resend_label: {
+        color: "#4ca1f0",
+        fontWeight: "700",
+    },
+    resendBtn: {
+        borderRadius: 3,
+        textAlign: "center",
+        backgroundColor: "#4ca1f0",
+        display: "flex",
+        padding: 15,
+        width: "35%",
+    },
+    resend_text: {
+        color: "white",
+        fontSize: 14,
+        fontWeight: "700",
+        justifyContent: "center",
+        alignSelf: "center",
     },
     tools: {
         display: "flex",
@@ -352,4 +321,4 @@ const modal_styles = StyleSheet.create({
     },
 });
 
-export default LoginScreen;
+export default ValidationScreen;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
     StyleSheet,
     Text,
@@ -8,99 +8,67 @@ import {
     Button,
     TouchableOpacity,
     ImageBackground,
-    KeyboardAvoidingView,
+    Dimensions,
     Modal,
 } from "react-native";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import CheckBox from '@react-native-community/checkbox';
 
-const userdata = [
-    {username: "khoanda", password: "khoanda"},
-    {username: "congtt", password: "congtt"},
-    {username: "khoacta", password: "khoacta"},
-    {username: "langunm", password: "langunm"}
-];
 
-const LoginScreen = ({navigation}) => {
+const ForgotPassScreen = ({navigation}) => {
 
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [eyeStatus, setEyeStatus] = useState(true);
-    const [isSelected, setSelection] = useState(false);
-    const [isModalWrongPass, setIsModalWrongPass] = useState(false);
-
-    const handleMatchingAccount = () => {
-
-        const flag = userdata.filter(item => {
-            return (item.username === username) && (item.password === password)
-        })
-
-        if (flag.length != 0) {
-            navigation.navigate("MainContainer");
-        }
-        else {
-            handleModalWrongPass(true);
-        }
-        
-    }
-
-    const handleModalWrongPass = (status) => {
-        setIsModalWrongPass(status)
-        if (status === true) {
-            const timeoutId = setTimeout(() => {
-                setIsModalWrongPass(false);
-            }, 1000)
-        }
-    }
+    const [phonenumber, setPhonenumber] = useState('');
+    const [isNotFill, setIsNotFill] = useState(false);
 
     const handleUsernameChange = (username) => {
         setUsername(username)
     }
 
-    const handlePasswordChange = (password) => {
-        setPassword(password)
+    const handlePhoneNumberChange = (phonenumber) => {
+        setPhonenumber(phonenumber)
     }
 
-    const handleEyeStatus = () => {
-        setEyeStatus(!eyeStatus)
+    const handleCheckingFill = () => {
+        if (username === "" || phonenumber === "") {
+            setIsNotFill(true)
+            const timeoutId = setTimeout(() => {
+                setIsNotFill(false);
+            }, 1000)
+        }
+        else {
+            navigation.navigate("ValidationScreen")
+        }
     }
 
-    const handleisSelected = () => {
-        setSelection(!isSelected)
-    }
-
-    const Modal_WrongPass = () => {
+    const Modal_NotFill = () => {
 
         return (
             <View>
                 <TouchableOpacity 
                     style={modal_styles.modal_container}
-                    onPress={() => {handleModalWrongPass(false)}}
+                    onPress={() => {setIsNotFill(false)}}
                 >
                     <View style={modal_styles.modal_box}>
-                        <Text style={modal_styles.modal_text}>Sai mật khẩu!</Text>
+                        <Text style={modal_styles.modal_text}>Bạn chưa điền {username == "" ? "tên đăng nhập": "mật khẩu"}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
         );
     }
 
-    const handleForgotPass = () => {
-        navigation.navigate("ForgotPassScreen")
-    }
 
     return (
         <View style={styles.container}>
             <TouchableOpacity 
                 style={styles.backBtn}
-                onPress={() => navigation.navigate("StartScreen")}
+                onPress={() => navigation.navigate("LoginScreen")}
             >
                 <FontAwesomeIcon name="chevron-left" color="#6A6F7D" size={30} />
             </TouchableOpacity>
 
-            <Text style={styles.header_text}>Xin chào</Text>
+            <Text style={styles.header_text}>Quên mật khẩu?</Text>
 
-            <Text style={styles.header_subtext}>Đăng nhập để chăm sóc cây nào!</Text>
+            <Text style={styles.header_subtext}>Nhanh chóng, đơn giản</Text>
 
             <View style={styles.input_container}>
                 <Text style={styles.input_label}>Tên đăng nhập</Text>
@@ -122,44 +90,30 @@ const LoginScreen = ({navigation}) => {
                     </View>
                 </View>
 
-                <Text style={styles.input_label}>Mật khẩu</Text>
+                <Text style={styles.input_label}>Số điện thoại</Text>
 
                 <View style={styles.action}>
                     <TextInput
-                        style={!eyeStatus ? [styles.input_box, styles.borderColorImp] : [styles.input_box]}
+                        style={styles.input_box}
                         placeholder=""
                         placeholderTextColor=""
-                        secureTextEntry={eyeStatus}
-                        onChangeText={(password) => handlePasswordChange(password)}
-                        value={password}
+                        onChangeText={(phonenumber) => handlePhoneNumberChange(phonenumber)}
+                        value={phonenumber}
                     />
-                    
-                    <TouchableOpacity 
-                        style={styles.visibility}
-                        onPress={() => handleEyeStatus()}
-                    >
-                        <FontAwesomeIcon name={eyeStatus ? "eye-slash" : "eye"} color={eyeStatus ? "#6A6F7D" : "#2DDA93"} size={30} />
-                    </TouchableOpacity>
                 </View>
                 
-                <View style={styles.tools}>
-                    {/* <View style={styles.checkbox_container}>
-                        <Text style={styles.checkbox_label}>Lưu mật khẩu</Text>
-                    </View> */}
-                    <TouchableOpacity 
-                        style={styles.forgotpass_container}
-                        onPress={() => handleForgotPass()}
-                    >
-                        <Text style={styles.forgotpass_label}>Quên mật khẩu?</Text>
-                    </TouchableOpacity>
-                </View>
+                {/* <View style={styles.tools}>
+                    <View style={styles.checkbox_container}>
+                        <Text style={styles.checkbox_label}>Xác nhận lấy lại mật khẩu qua số điện thoại</Text>
+                    </View>
+                </View> */}
             </View>
 
             <TouchableOpacity 
                 style={styles.loginBtn}
-                onPress={() => handleMatchingAccount()}
+                onPress={() => handleCheckingFill()}
             >
-                <Text style={styles.loginText}>Đăng nhập</Text> 
+                <Text style={styles.loginText}>Tiếp tục</Text> 
             </TouchableOpacity>
 
             <Text
@@ -179,10 +133,10 @@ const LoginScreen = ({navigation}) => {
             <Modal
                 transparent={true}
                 animationType="fade"
-                visible={isModalWrongPass}
-                onRequestClose={() => handleModalWrongPass(false)}
+                visible={isNotFill}
+                // onRequestClose={() => handleModalWrongPass(false)}
             >
-                <Modal_WrongPass />
+                <Modal_NotFill />
             </Modal>
         </View>
 
@@ -352,4 +306,4 @@ const modal_styles = StyleSheet.create({
     },
 });
 
-export default LoginScreen;
+export default ForgotPassScreen;
