@@ -227,6 +227,15 @@ const LoginScreen = ({navigation}) => {
             >
                 <Modal_WrongPass />
             </Modal>
+
+            <Modal
+                transparent={true}
+                animationType="fade"
+                visible={isModalWrongUsername}
+                onRequestClose={() => handleModalWrongUsername(false)}
+            >
+                <Modal_WrongUsername />
+            </Modal>
         </View>
 
         
