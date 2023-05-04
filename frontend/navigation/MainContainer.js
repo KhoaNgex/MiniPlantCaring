@@ -68,48 +68,6 @@ const MainContainer = () => {
             headerShown: false,
           }}
         />
-        {/* <Tab.Screen
-          name={notiName}
-          component={NotificationScreen}
-          options={{
-            headerTitle: () => (
-              <View
-                style={{
-                  paddingLeft: 15,
-                }}
-              >
-                <Text
-                  style={{
-                    color: "white",
-                    fontSize: 23,
-                    fontWeight: "500",
-                  }}
-                >
-                  Thông báo
-                </Text>
-                <Text
-                  style={{
-                    color: "white",
-                    fontSize: 14,
-                    fontWeight: "200",
-                    marginTop: 5,
-                  }}
-                >
-                  Nắm bắt tình hình nhanh chóng!
-                </Text>
-              </View>
-            ),
-            headerStyle: {
-              height: 170,
-            },
-            headerBackground: () => (
-              <Image
-                style={StyleSheet.absoluteFill}
-                source={require("../assets/header-bg.png")}
-              />
-            ),
-          }}
-        /> */}
         <Tab.Screen
           name={notiName}
           component={NotificationScreen}
@@ -121,13 +79,14 @@ const MainContainer = () => {
           name={settingName}
           component={SettingsScreen}
           options={{
-            title: "SETTING",
-            headerStyle: {
-              backgroundColor: "#34D79A",
-            },
-            headerTitleStyle: {
-              color: "white",
-            },
+            // title: "SETTING",
+            // headerStyle: {
+            //   backgroundColor: "#34D79A",
+            // },
+            // headerTitleStyle: {
+            //   color: "white",
+            // },
+            headerShown: false,
           }}
         />
       </Tab.Navigator>

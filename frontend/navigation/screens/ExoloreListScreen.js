@@ -54,7 +54,7 @@ const PlantList = ({ navigation }) => {
   }
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <View style={styles.header}>
         <Image source={headerBackground} style={styles.headerImg} />
         <Text
@@ -103,9 +103,8 @@ const PlantList = ({ navigation }) => {
           style={{ fontSize: 14 }}
         />
       </View>
-      <ScrollView>
-        <FlatList
-          style={styles.exploreList}
+      <ScrollView style={styles.exploreList} nestedScrollEnabled={true}>
+        <FlatList  nestedScrollEnabled={true}
           data={plantlists}
           numColumns={2}
           renderItem={({ item }) => (
@@ -129,7 +128,7 @@ const styles = StyleSheet.create({
   exploreList: {
     width: "100%",
     marginTop: 40,
-    marginBottom: 200,
+    // marginBottom: 20,
   },
   plantItemTouch: {
     alignItems: "center",

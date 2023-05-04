@@ -6,6 +6,7 @@ import {
   Image,
   Switch,
   FlatList,
+  ScrollView,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from "axios";
@@ -104,20 +105,21 @@ const NotificationScreen = () => {
             />
           </View>
         </View>
-
-        <FlatList
-          style={styles.notiList}
-          data={notiLists}
-          renderItem={({item}) => <Item notiInfor={item} />}
-          keyExtractor={item => item._id}
-        />
+        <ScrollView nestedScrollEnabled={true}>
+          <FlatList nestedScrollEnabled={true}
+            style={styles.notiList}
+            data={notiLists}
+            renderItem={({item}) => <Item notiInfor={item} />}
+            keyExtractor={item => item._id}
+          />
+        </ScrollView >
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     // justifyContent: "flex-start",
     // alignItems: "center",
   },
@@ -152,7 +154,7 @@ const styles = StyleSheet.create({
   notiList: {
     width: "100%",
     marginTop: 20,
-    marginBottom: 280
+    marginBottom: 20
   },
   notiItemContainer: {
     width: "90%",

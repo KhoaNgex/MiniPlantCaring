@@ -109,7 +109,10 @@ const LoginScreen = ({navigation}) => {
                 </TouchableOpacity>
             </View>
         );
-        
+    }
+
+    const handleForgotPass = () => {
+        navigation.navigate("ForgotPassScreen")
     }
 
     const Modal_WrongUsername = () => {
@@ -183,7 +186,15 @@ const LoginScreen = ({navigation}) => {
                 </View>
                 
                 <View style={styles.tools}>
-                    <Text style={styles.forgotpass}>Quên mật khẩu?</Text>
+                    {/* <View style={styles.checkbox_container}>
+                        <Text style={styles.checkbox_label}>Lưu mật khẩu</Text>
+                    </View> */}
+                    <TouchableOpacity 
+                        style={styles.forgotpass_container}
+                        onPress={() => handleForgotPass()}
+                    >
+                        <Text style={styles.forgotpass_label}>Quên mật khẩu?</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -215,15 +226,6 @@ const LoginScreen = ({navigation}) => {
                 onRequestClose={() => handleModalWrongPass(false)}
             >
                 <Modal_WrongPass />
-            </Modal>
-
-            <Modal
-                transparent={true}
-                animationType="fade"
-                visible={isModalWrongUsername}
-                onRequestClose={() => handleModalWrongUsername(false)}
-            >
-                <Modal_WrongUsername />
             </Modal>
         </View>
 
@@ -270,17 +272,14 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        width: 300,
+        width: "auto",
         marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
     },
     input_label: {
         color: "#6A6F7D",
         fontSize: 15,
         fontWeight: "200",
         marginTop: 20,
-        marginLeft: -15
     },
     input_box: {
         borderWidth: 0.5,
@@ -301,6 +300,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginTop: 20,
+        width: "100%",
     },
     loginBtn: {
         width: "100%",
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
         color: "#495566",
         marginLeft: 5,
     },
-    forgotpass: {
+    forgotpass_label: {
         color: "#4ca1f0",
         fontWeight: "700",
     },
@@ -362,11 +362,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         width: "100%",
-        marginLeft: -15
     },
     visibility: {
-        display: "flex",
-        justifyContent: "center",
+        position: "absolute",
+        top: 0,
+        right: 0,
         marginLeft: 5,
     },
     borderColorImp: {
@@ -383,8 +383,8 @@ const modal_styles = StyleSheet.create({
         height: MODAL_HEIGHT,
         backgroundColor: "#f25c43",
         borderRadius: 10,
-        marginTop: 40,
-        width: "80%",
+        marginTop: 35,
+        width: "85%",
         justifyContent: "center",
         alignItems: "center",
     },
